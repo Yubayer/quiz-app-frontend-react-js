@@ -28,7 +28,8 @@ function Login() {
                             console.log(res.data.message)
                             return
                         } else {
-                            setUser({ ...user, isAuth: true, ...res.data.user, token: res.data.token })
+                            console.log(res)
+                            setUser({ ...user, isAuth: true, name: res.data.name, email: res.data.email })
                             navigate('/')
                         }
                     }

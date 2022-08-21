@@ -29,7 +29,7 @@ function App() {
             <div className="container">
               <Routes>
                 <Route path='/' element={<Home />}></Route>
-                <Route path='/quiz' element={<ProtectedRoute><Quiz /></ProtectedRoute>}></Route>
+                <Route path='/quiz/:id' element={<ProtectedRoute><Quiz /></ProtectedRoute>}></Route>
                 <Route path='/result' element={<ProtectedRoute><Result /></ProtectedRoute>}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
