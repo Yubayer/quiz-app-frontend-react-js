@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import loginImg from '../images/login.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import InputText from '../components/InputText'
@@ -7,11 +7,18 @@ import Button from '../components/Button'
 import { ThemeContext } from '../Hook/ThemeContext'
 import axios from 'axios'
 
+import toast, { Toaster } from 'react-hot-toast';
+
+
 function Login() {
     const navigate = useNavigate()
     const themeContext = useContext(ThemeContext)
     const { user, setUser } = themeContext
     const [auth, setAuth] = useState({})
+
+    useEffect(() => {
+        console.log("toaster")
+    }, [])
 
     const handleSubmitFormLogin = e => {
         e.preventDefault()
@@ -29,8 +36,15 @@ function Login() {
                             return
                         } else {
                             console.log(res)
-                            setUser({ ...user, isAuth: true, name: res.data.name, email: res.data.email })
-                            navigate('/')
+                            toast.success('Successfully Logged in!')
+                            setUser({ 
+                                ...user, 
+                                isAuth: true, 
+                                name: res.data.name, 
+                                email: res.data.email,
+                                id: res.data.id
+                            })
+                            setTimeout(() => navigate('/'), 1000)
                         }
                     }
                 })
@@ -45,6 +59,10 @@ function Login() {
 
     return (
         <>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
             <h1>Login to your account</h1>
             <div className="column">
                 <div className="illustration">
