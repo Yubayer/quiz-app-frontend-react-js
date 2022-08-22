@@ -5,6 +5,7 @@ import { ThemeContext } from '../Hook/ThemeContext'
 import InputText from '../components/InputText'
 import InputCheckbox from '../components/InputCheckbox'
 import Button from '../components/Button'
+import axios from 'axios'
 
 function Register() {
     const navigate = useNavigate()
@@ -16,7 +17,17 @@ function Register() {
     const handleSubmitForm = (e) => {
         e.preventDefault()
         if(checked){
-            navigate('/login')
+            console.log(user)
+            axios.post('/user/register', {
+                name: user.name,
+                email: user.email,
+                password: user.password
+            })
+            .then(res => {
+                navigate('/login')
+            })
+            .catch(err => console.log(err))
+            
         }
     }
 

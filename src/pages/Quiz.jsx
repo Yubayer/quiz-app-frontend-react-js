@@ -12,6 +12,7 @@ function Quiz() {
     const [activeIndex, setActiveIndex] = useState(0)
     const [progress, setProgress] = useState({ width: '0%' })
     const [isFinished, setIsFinished] = useState(false)
+    const [answer, setAnswer] = useState({})
     useEffect(() => {
         axios.get('/quiz/' + id)
             .then(res => {
@@ -35,6 +36,10 @@ function Quiz() {
         setActiveIndex(index)
     }
 
+    const handleCheckAnswer = e => {
+        console.log(e.target.checked)
+    }
+
     return (
         <>
             <main className="main">
@@ -50,8 +55,13 @@ function Quiz() {
 
                         <div className="answers">
                             {question.options.map(option => (
-                                <label className="answer" htmlFor="option1" key={option._id + Math.random() * 1000}>
-                                    <input type="checkbox" id="option1" />
+                                <label className={`answer ${option.check ? 'bg-info' : ''}`} htmlFor="option1" key={option._id + Math.random() * 1000}>
+                                    <input
+                                        type="checkbox"
+                                        id="option1"
+                                        className='bg-primary'
+                                        onChange={handleCheckAnswer}
+                                    />
                                     {option.option}
                                 </label>
                             ))}

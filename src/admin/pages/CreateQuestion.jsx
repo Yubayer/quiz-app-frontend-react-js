@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import InputQuestionOption from '../../components/InputQuestionOption'
 import InputText from '../../components/InputText'
 import { ThemeContext } from '../../Hook/ThemeContext'
 
@@ -24,33 +25,17 @@ function CreateQuestion() {
   }
 
   const handleOptionText = e => {
-    if (e.target.name === 'option1') {
-      setOption1({ ...option1, ['option']: e.target.value })
-    }
-    if (e.target.name === 'option2') {
-      setOption2({ ...option2, ['option']: e.target.value })
-    }
-    if (e.target.name === 'option3') {
-      setOption3({ ...option3, ['option']: e.target.value })
-    }
-    if (e.target.name === 'option4') {
-      setOption4({ ...option4, ['option']: e.target.value })
-    }
+    if (e.target.name === 'option1') setOption1({ ...option1, ['option']: e.target.value })
+    if (e.target.name === 'option2') setOption2({ ...option2, ['option']: e.target.value })
+    if (e.target.name === 'option3') setOption3({ ...option3, ['option']: e.target.value })
+    if (e.target.name === 'option4') setOption4({ ...option4, ['option']: e.target.value })
   }
 
   const handleOptionCheck = e => {
-    if (e.target.name === 'option1') {
-      setOption1({ ...option1, ['check']: e.target.value === 'true' ? true: false })
-    }
-    if (e.target.name === 'option2') {
-      setOption2({ ...option2, ['check']: e.target.value === 'true' ? true: false })
-    }
-    if (e.target.name === 'option3') {
-      setOption3({ ...option3, ['check']: e.target.value === 'true' ? true: false })
-    }
-    if (e.target.name === 'option4') {
-      setOption4({ ...option4, ['check']: e.target.value === 'true' ? true: false })
-    }
+    if (e.target.name === 'option1') setOption1({ ...option1, ['check']: e.target.value === 'true' ? true : false })
+    if (e.target.name === 'option2') setOption2({ ...option2, ['check']: e.target.value === 'true' ? true : false })
+    if (e.target.name === 'option3') setOption3({ ...option3, ['check']: e.target.value === 'true' ? true : false })
+    if (e.target.name === 'option4') setOption4({ ...option4, ['check']: e.target.value === 'true' ? true : false })
   }
 
   const handleQuestionInput = e => {
@@ -58,9 +43,7 @@ function CreateQuestion() {
   }
 
   const handleSubmitQuestion = e => {
-
     e.preventDefault()
-
     const newQuestion = {
       userId: user.id,
       quizId: id,
@@ -130,102 +113,39 @@ function CreateQuestion() {
           </div>
           <div className='----------------------'>
 
-            <div className="card mb-2">
-              <div className="card-body input-group">
-                <div className="col-md-8">
-                  <label className="form-label">{option1.name}</label>
-                  <InputText
-                    onChange={handleOptionText}
-                    name={option1.name}
+            <InputQuestionOption
+              handleOptionCheck={handleOptionCheck}
+              onChange={handleOptionText}
+              type="text"
+              className="form-control"
+              option={option1}
+            />
 
-                    type="text"
-                    className="form-control"
-                    id="inputCity"
-                  />
-                </div>
-                <div className="col-md-3 mr-2 ml-2" style={{ margin: '0 15px' }}>
-                  <label className="form-label">Set Answer</label>
-                  <select onChange={handleOptionCheck} name={option1.name} id="inputState" className="form-select">
-                    <option selected={option1.check ? true : false} value='true'>True</option>
-                    <option selected={!option1.check ? true : false} value='false'>False</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <InputQuestionOption
+              handleOptionCheck={handleOptionCheck}
+              onChange={handleOptionText}
+              type="text"
+              className="form-control"
+              option={option2}
+            />
 
-            <div className="card mb-2">
-              <div className="card-body input-group">
-                <div className="col-md-8">
-                  <label className="form-label">{option2.name}</label>
-                  <InputText
-                    onChange={handleOptionText}
-                    name={option2.name}
-                    value={option2.option}
-                    type="text"
-                    className="form-control"
-                    id="inputCity"
-                  />
-                </div>
-                <div className="col-md-3 mr-2 ml-2" style={{ margin: '0 15px' }}>
-                  <label className="form-label">Set Answer</label>
-                  <select onChange={handleOptionCheck} name={option2.name} id="inputState" className="form-select">
-                    <option selected={option2.check ? true : false} value='true'>True</option>
-                    <option selected={!option2.check ? true : false} value='false'>False</option>
-                  </select>
-                </div>
-              </div>
-            </div>
+            <InputQuestionOption
+              handleOptionCheck={handleOptionCheck}
+              onChange={handleOptionText}
+              type="text"
+              className="form-control"
+              option={option3}
+            />
 
-            <div className="card mb-2">
-              <div className="card-body input-group">
-                <div className="col-md-8">
-                  <label className="form-label">{option3.name}</label>
-                  <InputText
-                    onChange={handleOptionText}
-                    name={option3.name}
-                    value={option3.option}
-                    type="text"
-                    className="form-control"
-                    id="inputCity"
-                  />
-                </div>
-                <div className="col-md-3 mr-2 ml-2" style={{ margin: '0 15px' }}>
-                  <label className="form-label">Set Answer</label>
-                  <select onChange={handleOptionCheck} name={option3.name} id="inputState" className="form-select">
-                    <option selected={option3.check ? true : false} value='true'>True</option>
-                    <option selected={!option3.check ? true : false} value='false'>False</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div className="card mb-2">
-              <div className="card-body input-group">
-                <div className="col-md-8">
-                  <label className="form-label">{option4.name}</label>
-                  <InputText
-                    onChange={handleOptionText}
-                    name={option4.name}
-                    value={option4.option}
-                    type="text"
-                    className="form-control"
-                    id="inputCity"
-                  />
-                </div>
-                <div className="col-md-3 mr-2 ml-2" style={{ margin: '0 15px' }}>
-                  <label className="form-label">Set Answer</label>
-                  <select onChange={handleOptionCheck} name={option4.name} id="inputState" className="form-select">
-                    <option selected={option4.check ? true : false} value='true'>True</option>
-                    <option selected={!option4.check ? true : false} value='false'>False</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
+            <InputQuestionOption
+              handleOptionCheck={handleOptionCheck}
+              onChange={handleOptionText}
+              type="text"
+              className="form-control"
+              option={option4}
+            />
           </div>
         </div>
-
-
 
         <div className="col-12">
           <div className="form-check">
